@@ -1,0 +1,343 @@
+{% extends "fasion/base.html" %}
+
+
+{% block body %}
+        <!-- User Profile / Settings Page -->
+        <section id="profile-page" class="page-section">
+            <div class="container mx-auto px-4 py-8">
+                <h1 class="text-3xl font-bold mb-6">My Account</h1>
+                
+                <div class="flex flex-col md:flex-row gap-8">
+                    <!-- Sidebar Navigation -->
+                    <div class="w-full md:w-1/4">
+                        <div class="bg-base-100 rounded-lg shadow-md overflow-hidden">
+                            <div class="p-6 bg-primary text-primary-content">
+                                <div class="flex items-center gap-4">
+                                    <div class="avatar">
+                                        <div class="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                                            <div class="bg-primary-focus text-white flex items-center justify-center h-full font-bold text-xl">JD</div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h2 class="text-xl font-bold">John Doe</h2>
+                                        <p>john.doe@example.com</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <ul class="menu p-4 bg-base-100">
+                                <li class="menu-title">
+                                    <span>Account Settings</span>
+                                </li>
+                                <li><a class="active" onclick="switchProfileTab('personal')">Personal Info</a></li>
+                                <li><a onclick="switchProfileTab('addresses')">Addresses</a></li>
+                                <li><a onclick="switchProfileTab('payment')">Payment Methods</a></li>
+                                <li class="menu-title">
+                                    <span>Orders</span>
+                                </li>
+                                <li><a onclick="switchProfileTab('orders')">Order History</a></li>
+                                <li><a onclick="switchProfileTab('returns')">Returns & Refunds</a></li>
+                                <li class="menu-title">
+                                    <span>Other</span>
+                                </li>
+                                <li><a onclick="navigateTo('login')">Log Out</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Main Content Area -->
+                    <div class="w-full md:w-3/4">
+                        <!-- Personal Info Tab -->
+                        <div id="personal-tab" class="bg-base-100 p-6 rounded-lg shadow-md">
+                            <h2 class="text-xl font-bold mb-6">Personal Information</h2>
+                            
+                            <form class="space-y-4">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="form-control">
+                                        <label class="label">
+                                            <span class="label-text">First Name</span>
+                                        </label>
+                                        <input type="text" class="input input-bordered" value="John" />
+                                    </div>
+                                    
+                                    <div class="form-control">
+                                        <label class="label">
+                                            <span class="label-text">Last Name</span>
+                                        </label>
+                                        <input type="text" class="input input-bordered" value="Doe" />
+                                    </div>
+                                </div>
+                                
+                                <div class="form-control">
+                                    <label class="label">
+                                        <span class="label-text">Email Address</span>
+                                    </label>
+                                    <input type="email" class="input input-bordered" value="john.doe@example.com" />
+                                </div>
+                                
+                                <div class="form-control">
+                                    <label class="label">
+                                        <span class="label-text">Phone Number</span>
+                                    </label>
+                                    <input type="tel" class="input input-bordered" value="(555) 123-4567" />
+                                </div>
+                                
+                                <div class="form-control">
+                                    <label class="label">
+                                        <span class="label-text">Date of Birth</span>
+                                    </label>
+                                    <input type="date" class="input input-bordered" value="1990-01-15" />
+                                </div>
+                                
+                                <div class="divider">Change Password</div>
+                                
+                                <div class="form-control">
+                                    <label class="label">
+                                        <span class="label-text">Current Password</span>
+                                    </label>
+                                    <input type="password" class="input input-bordered" placeholder="Enter current password" />
+                                </div>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="form-control">
+                                        <label class="label">
+                                            <span class="label-text">New Password</span>
+                                        </label>
+                                        <input type="password" class="input input-bordered" placeholder="Enter new password" />
+                                    </div>
+                                    
+                                    <div class="form-control">
+                                        <label class="label">
+                                            <span class="label-text">Confirm New Password</span>
+                                        </label>
+                                        <input type="password" class="input input-bordered" placeholder="Confirm new password" />
+                                    </div>
+                                </div>
+                                
+                                <div class="form-control mt-6">
+                                    <button class="btn btn-primary">Save Changes</button>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <!-- Addresses Tab -->
+                        <div id="addresses-tab" class="bg-base-100 p-6 rounded-lg shadow-md hidden">
+                            <div class="flex justify-between items-center mb-6">
+                                <h2 class="text-xl font-bold">Saved Addresses</h2>
+                                <button class="btn btn-primary">Add New Address</button>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <!-- Address 1 -->
+                                <div class="border rounded-lg p-4 relative">
+                                    <div class="badge badge-primary absolute top-2 right-2">Default</div>
+                                    <h3 class="font-bold text-lg mb-2">Home</h3>
+                                    <p class="mb-1">John Doe</p>
+                                    <p class="mb-1">123 Main Street, Apt 4B</p>
+                                    <p class="mb-1">New York, NY 10001</p>
+                                    <p class="mb-1">United States</p>
+                                    <p class="mb-3">Phone: (555) 123-4567</p>
+                                    
+                                    <div class="flex justify-end gap-2">
+                                        <button class="btn btn-sm btn-outline btn-error">Delete</button>
+                                        <button class="btn btn-sm btn-primary">Edit</button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Address 2 -->
+                                <div class="border rounded-lg p-4">
+                                    <h3 class="font-bold text-lg mb-2">Office</h3>
+                                    <p class="mb-1">John Doe</p>
+                                    <p class="mb-1">456 Business Ave, Suite 101</p>
+                                    <p class="mb-1">New York, NY 10002</p>
+                                    <p class="mb-1">United States</p>
+                                    <p class="mb-3">Phone: (555) 987-6543</p>
+                                    
+                                    <div class="flex justify-end gap-2">
+                                        <button class="btn btn-sm btn-outline btn-error">Delete</button>
+                                        <button class="btn btn-sm btn-primary">Edit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Payment Methods Tab -->
+                        <div id="payment-tab" class="bg-base-100 p-6 rounded-lg shadow-md hidden">
+                            <div class="flex justify-between items-center mb-6">
+                                <h2 class="text-xl font-bold">Saved Payment Methods</h2>
+                                <button class="btn btn-primary">Add New Card</button>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <!-- Card 1 -->
+                                <div class="border rounded-lg p-4 relative">
+                                    <div class="badge badge-primary absolute top-2 right-2">Default</div>
+                                    <div class="flex items-center mb-4">
+                                        <i class="fab fa-cc-visa text-3xl mr-2"></i>
+                                        <div>
+                                            <p class="font-bold">Visa ending in 1234</p>
+                                            <p class="text-sm">Expires: 05/25</p>
+                                        </div>
+                                    </div>
+                                    <p class="mb-1">John Doe</p>
+                                    <p class="mb-3">Billing: 123 Main Street, New York</p>
+                                    
+                                    <div class="flex justify-end gap-2">
+                                        <button class="btn btn-sm btn-outline btn-error">Delete</button>
+                                        <button class="btn btn-sm btn-primary">Edit</button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Card 2 -->
+                                <div class="border rounded-lg p-4">
+                                    <div class="flex items-center mb-4">
+                                        <i class="fab fa-cc-mastercard text-3xl mr-2"></i>
+                                        <div>
+                                            <p class="font-bold">Mastercard ending in 5678</p>
+                                            <p class="text-sm">Expires: 09/26</p>
+                                        </div>
+                                    </div>
+                                    <p class="mb-1">John Doe</p>
+                                    <p class="mb-3">Billing: 456 Business Ave, New York</p>
+                                    
+                                    <div class="flex justify-end gap-2">
+                                        <button class="btn btn-sm btn-outline btn-error">Delete</button>
+                                        <button class="btn btn-sm btn-primary">Edit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Orders Tab -->
+                        <div id="orders-tab" class="bg-base-100 p-6 rounded-lg shadow-md hidden">
+                            <h2 class="text-xl font-bold mb-6">Order History</h2>
+                            
+                            <!-- Filter Section -->
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="text-sm font-medium mr-2 self-center">Filter by:</span>
+                                <button class="btn btn-sm btn-primary">Last Month</button>
+                                <button class="btn btn-sm btn-outline">3 Months</button>
+                                <button class="btn btn-sm btn-outline">6 Months</button>
+                                <button class="btn btn-sm btn-outline">Older</button>
+                            </div>
+                            
+                            <!-- Orders List -->
+                            <div class="space-y-6">
+                                <!-- Order 1 -->
+                                <div class="border rounded-lg overflow-hidden">
+                                    <div class="bg-base-200 p-4 flex justify-between items-center">
+                                        <div>
+                                            <p class="font-bold">Order #ORD-2023-54321</p>
+                                            <p class="text-sm">Placed on: July 15, 2023</p>
+                                        </div>
+                                        <div class="text-right">
+                                            <span class="badge badge-success">Delivered</span>
+                                            <p class="font-bold mt-1">$157.96</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="p-4">
+                                        <div class="flex flex-wrap gap-4 mb-4">
+                                            <div class="w-16 h-16 bg-gray-200 rounded-md overflow-hidden">
+                                                <img src="https://cdn.jsdelivr.net/gh/hungrybluedev/dummy-assets@main/images/fashion-product1.jpg" alt="Product" class="h-full w-full object-cover" />
+                                            </div>
+                                            <div class="w-16 h-16 bg-gray-200 rounded-md overflow-hidden">
+                                                <img src="https://cdn.jsdelivr.net/gh/hungrybluedev/dummy-assets@main/images/fashion-product2.jpg" alt="Product" class="h-full w-full object-cover" />
+                                            </div>
+                                            <div class="w-16 h-16 bg-gray-200 rounded-md overflow-hidden">
+                                                <img src="https://cdn.jsdelivr.net/gh/hungrybluedev/dummy-assets@main/images/fashion-product4.jpg" alt="Product" class="h-full w-full object-cover" />
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="flex justify-between">
+                                            <button class="btn btn-sm btn-outline">View Details</button>
+                                            <button class="btn btn-sm btn-primary">Buy Again</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Order 2 -->
+                                <div class="border rounded-lg overflow-hidden">
+                                    <div class="bg-base-200 p-4 flex justify-between items-center">
+                                        <div>
+                                            <p class="font-bold">Order #ORD-2023-43210</p>
+                                            <p class="text-sm">Placed on: June 22, 2023</p>
+                                        </div>
+                                        <div class="text-right">
+                                            <span class="badge badge-success">Delivered</span>
+                                            <p class="font-bold mt-1">$95.99</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="p-4">
+                                        <div class="flex flex-wrap gap-4 mb-4">
+                                            <div class="w-16 h-16 bg-gray-200 rounded-md overflow-hidden">
+                                                <img src="https://cdn.jsdelivr.net/gh/hungrybluedev/dummy-assets@main/images/fashion-product3.jpg" alt="Product" class="h-full w-full object-cover" />
+                                            </div>
+                                            <div class="w-16 h-16 bg-gray-200 rounded-md overflow-hidden">
+                                                <img src="https://cdn.jsdelivr.net/gh/hungrybluedev/dummy-assets@main/images/fashion-product5.jpg" alt="Product" class="h-full w-full object-cover" />
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="flex justify-between">
+                                            <button class="btn btn-sm btn-outline">View Details</button>
+                                            <button class="btn btn-sm btn-primary">Buy Again</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Order 3 -->
+                                <div class="border rounded-lg overflow-hidden">
+                                    <div class="bg-base-200 p-4 flex justify-between items-center">
+                                        <div>
+                                            <p class="font-bold">Order #ORD-2023-32109</p>
+                                            <p class="text-sm">Placed on: May 8, 2023</p>
+                                        </div>
+                                        <div class="text-right">
+                                            <span class="badge badge-success">Delivered</span>
+                                            <p class="font-bold mt-1">$209.98</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="p-4">
+                                        <div class="flex flex-wrap gap-4 mb-4">
+                                            <div class="w-16 h-16 bg-gray-200 rounded-md overflow-hidden">
+                                                <img src="https://cdn.jsdelivr.net/gh/hungrybluedev/dummy-assets@main/images/fashion-product7.jpg" alt="Product" class="h-full w-full object-cover" />
+                                            </div>
+                                            <div class="w-16 h-16 bg-gray-200 rounded-md overflow-hidden">
+                                                <img src="https://cdn.jsdelivr.net/gh/hungrybluedev/dummy-assets@main/images/fashion-product8.jpg" alt="Product" class="h-full w-full object-cover" />
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="flex justify-between">
+                                            <button class="btn btn-sm btn-outline">View Details</button>
+                                            <button class="btn btn-sm btn-primary">Buy Again</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Returns Tab -->
+                        <div id="returns-tab" class="bg-base-100 p-6 rounded-lg shadow-md hidden">
+                            <h2 class="text-xl font-bold mb-6">Returns & Refunds</h2>
+                            
+                            <div class="text-center py-10">
+                                <div class="text-6xl mb-4">
+                                    <i class="fas fa-box-open"></i>
+                                </div>
+                                <h3 class="text-xl font-bold mb-2">No active returns</h3>
+                                <p class="mb-6">You don't have any return or refund requests at this time.</p>
+                                <button class="btn btn-primary" onclick="switchProfileTab('orders')">View Orders</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+{% endblock body %}
+
+{% block scripts %}
+
+{% endblock scripts %}
